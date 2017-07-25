@@ -11,8 +11,9 @@ var request = require('request');
 
 var fs = require('fs');
 
-var user_request = process.argv[2];
-var input = process.argv[3];
+var arg = process.argv;
+var user_request = arg[2];
+var input = arg[3];
 
 function makeRequest() {
 	if (user_request === 'my-tweets') {
@@ -21,6 +22,8 @@ function makeRequest() {
 		getSpotify();
 	} else if ( user_request === 'movie-this') {
 		getMovie();
+	} else if ( user_request === 'do-what-it-says') {
+		doWhatItSays();
 	} else {
 		console.log('Liri does not know that.')
 	}
@@ -77,16 +80,10 @@ function doWhatItSays() {
 		if (error) {
 			return console.log(error);
 		}
-		var dataArr = data.split(',');
-		if (dataArr.length == 2) {
-			pick(dataArr[0], dataArr[1]);
-		} else if (dataArr.length == 1) {
-			pick(dataArr[0]);
-		}
+		arg.push(data);
+		console.log(arg);
 	});
 }
-
-doWhatItSays();
 
 
 
