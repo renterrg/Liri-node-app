@@ -78,10 +78,15 @@ function getMovie() {
 function doWhatItSays() {
 	fs.readFile('random.txt', 'utf8', function (error, data){
 		if (error) {
-			return console.log(error);
+			console.log(error);
 		}
-		arg.push(data);
-		console.log(arg);
+		
+		var textArray = data.split(',');
+
+		user_request = textArray[0].trim();
+		input = textArray[1].trim();
+
+		makeRequest();
 	});
 }
 
